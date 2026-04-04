@@ -6,8 +6,6 @@ local Types = require("@self/Types")
 local Debounce = {}
 Debounce.__index = Debounce
 
-local Types = require(script.Types)
-
 function Debounce.new()
 	local self = {_states = {}}
 	return setmetatable(self, Debounce)
