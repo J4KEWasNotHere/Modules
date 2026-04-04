@@ -6,6 +6,13 @@ local Types = require("@self/Types")
 local Debounce = {}
 Debounce.__index = Debounce
 
+-- Utility
+
+local function currentTime(): number -- In case you want to change the method
+	return os.clock()
+end
+
+-- Constructor
 
 function Debounce.new()
 	local self = {_states = {}}
@@ -19,7 +26,7 @@ function Debounce.Run(self: Types.ClassV2, key: string, delayTime: number, fn: (
 	end
 	
 	self._states[key] = {
-		time = os.clock(),
+		time = currentTime(),
 		duration = delayTime
 	}
 	
@@ -34,7 +41,7 @@ function Debounce.IsActive(self: Types.ClassV2, key: string)
 		return false
 	end
 	
-	if (os.clock() - data.time) > data.duration then
+	if (currentTime() - data.time) > data.duration then
 		self._states[key] = nil
 		return false
 	end
